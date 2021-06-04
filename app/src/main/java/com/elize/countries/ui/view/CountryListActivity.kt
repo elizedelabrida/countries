@@ -24,13 +24,17 @@ class CountryListActivity : AppCompatActivity(R.layout.activity_country_list) {
         initializeViewModel()
         setListAdapter()
         observeViewModel()
-        with ( viewBinding.countryListRefreshLayout) {
+        configureRefreshLayout()
+
+    }
+
+    private fun configureRefreshLayout() {
+        with(viewBinding.countryListRefreshLayout) {
             setOnRefreshListener {
                 isRefreshing = false
                 viewModel.refresh()
             }
         }
-
     }
 
     private fun initializeViewModel() {
