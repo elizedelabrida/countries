@@ -57,13 +57,13 @@ class CountryListActivity : AppCompatActivity(R.layout.activity_country_list) {
 
     private fun observeLoading() {
         viewModel.loading.observe(this, Observer { isLoading ->
-            toggleViewVisibility(isLoading, viewBinding.countryListLoading)
+            viewBinding.countryListLoading.visibility = getViewVisibilityFromBoolean(isLoading)
         })
     }
 
     private fun observeCountryLoadError() {
         viewModel.countryLoadError.observe(this, Observer { isError ->
-            toggleViewVisibility(isError, viewBinding.countryListError)
+            viewBinding.countryListError.visibility = getViewVisibilityFromBoolean(isError)
         })
     }
 
@@ -73,13 +73,10 @@ class CountryListActivity : AppCompatActivity(R.layout.activity_country_list) {
         })
     }
 
-    private fun toggleViewVisibility(visible: Boolean?, view: View) {
-        visible?.let {
-            if (visible) {
-                view.visibility = View.VISIBLE
-            } else {
-                view.visibility = View.GONE
-            }
+    private fun getViewVisibilityFromBoolean(isVisible: Boolean?): Int {
+        if (isVisible == true) {
+            return View.VISIBLE
         }
+        return View.GONE
     }
 }

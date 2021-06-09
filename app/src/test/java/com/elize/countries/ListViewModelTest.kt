@@ -56,7 +56,6 @@ class ListViewModelTest {
     fun getCountriesFail() {
         testSingle = Single.error(Throwable())
         Mockito.`when`(countryRepository.getCountries()).thenReturn(testSingle)
-
         listViewModel.refresh()
 
         Assert.assertEquals(true, listViewModel.countryLoadError.value)
