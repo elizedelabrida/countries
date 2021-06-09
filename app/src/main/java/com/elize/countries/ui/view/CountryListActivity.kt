@@ -1,13 +1,13 @@
 package com.elize.countries.ui.view
 
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.elize.countries.R
 import com.elize.countries.databinding.ActivityCountryListBinding
+import com.elize.countries.extension.changeVisibility
 import com.elize.countries.ui.adapter.CountryListAdapter
 import com.elize.countries.ui.viewmodel.ListViewModel
 
@@ -56,14 +56,14 @@ class CountryListActivity : AppCompatActivity(R.layout.activity_country_list) {
     }
 
     private fun observeLoading() {
-        viewModel.loading.observe(this, Observer { isLoading ->
-            viewBinding.countryListLoading.visibility = getViewVisibilityFromBoolean(isLoading)
+        viewModel.loading.observe(this, Observer { displayLoading ->
+            viewBinding.countryListLoading.changeVisibility(displayLoading)
         })
     }
 
     private fun observeCountryLoadError() {
-        viewModel.countryLoadError.observe(this, Observer { isError ->
-            viewBinding.countryListError.visibility = getViewVisibilityFromBoolean(isError)
+        viewModel.countryLoadError.observe(this, Observer { displayError ->
+            viewBinding.countryListError.changeVisibility(displayError)
         })
     }
 
@@ -72,11 +72,6 @@ class CountryListActivity : AppCompatActivity(R.layout.activity_country_list) {
             countries?.let { countriesAdapter.updateCountries(countries) }
         })
     }
-
-    private fun getViewVisibilityFromBoolean(isVisible: Boolean?): Int {
-        if (isVisible == true) {
-            return View.VISIBLE
-        }
-        return View.GONE
-    }
 }
+
+
