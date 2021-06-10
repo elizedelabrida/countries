@@ -11,9 +11,10 @@ import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class ListViewModel: ViewModel() {
+class ListViewModel : ViewModel() {
     private val disposable = CompositeDisposable()
     val countries = MutableLiveData<List<Country>>() // To study MVVM: Variable to watch
+
     // current countries
     val countryLoadError = MutableLiveData<Boolean>() // To study MVVM: Variable to check if there
     // was an error after loading
@@ -22,6 +23,7 @@ class ListViewModel: ViewModel() {
 
     @Inject
     lateinit var countryRepository: CountryRepository
+
     init {
         DaggerAppComponent.create().inject(this)
     }

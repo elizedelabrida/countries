@@ -18,6 +18,11 @@ class CountryListAdapter(var countries: ArrayList<Country>) :
         notifyDataSetChanged()
     }
 
+    fun clearAllItems() {
+        countries.clear()
+        notifyDataSetChanged()
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CountryViewHolder {
         val itemBinding =
             ItemCountryBinding.inflate(LayoutInflater.from(parent.context), parent, false)

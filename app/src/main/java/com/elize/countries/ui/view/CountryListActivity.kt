@@ -57,19 +57,27 @@ class CountryListActivity : AppCompatActivity(R.layout.activity_country_list) {
 
     private fun observeLoading() {
         viewModel.loading.observe(this, Observer { displayLoading ->
+            if (displayLoading) {
+                countriesAdapter.clearAllItems()
+            }
             viewBinding.countryListLoading.changeVisibility(displayLoading)
         })
     }
 
     private fun observeCountryLoadError() {
         viewModel.countryLoadError.observe(this, Observer { displayError ->
+            if (displayError) {
+                countriesAdapter.clearAllItems()
+            }
             viewBinding.countryListError.changeVisibility(displayError)
         })
     }
 
     private fun observeCountries() {
         viewModel.countries.observe(this, Observer { countries ->
-            countries?.let { countriesAdapter.updateCountries(countries) }
+            countries?.let {
+                countriesAdapter.updateCountries(countries)
+            }
         })
     }
 }
