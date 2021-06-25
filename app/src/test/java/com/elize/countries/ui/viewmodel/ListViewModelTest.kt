@@ -1,4 +1,4 @@
-package com.elize.countries
+package com.elize.countries.ui.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.elize.countries.model.Country
@@ -42,9 +42,9 @@ class ListViewModelTest {
     fun getCountriesSuccess() {
         val country = Country("countryName", "capital", "url")
         val countriesList = arrayListOf(country)
-
         testSingle = Single.just(countriesList)
         Mockito.`when`(countryRepository.getCountries()).thenReturn(testSingle)
+
         listViewModel.refresh()
 
         Assert.assertEquals(1, listViewModel.countries.value?.size)
@@ -56,6 +56,7 @@ class ListViewModelTest {
     fun getCountriesFail() {
         testSingle = Single.error(Throwable())
         Mockito.`when`(countryRepository.getCountries()).thenReturn(testSingle)
+
         listViewModel.refresh()
 
         Assert.assertEquals(true, listViewModel.countryLoadError.value)
