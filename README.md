@@ -1,2 +1,2 @@
 # countries
- Application created to study Kotlin, MVVM, Dagger, RxJava, Mockito and View Binding =)
+ Application created to study Kotlin, MVVM, Dagger, RxJava, Mockito, Robolectric and View Binding =)

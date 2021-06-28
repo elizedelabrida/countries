@@ -1,11 +1,10 @@
 package com.elize.countries.ui.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.elize.countries.model.Country
 import com.elize.countries.retrofit.CountryRepository
-import com.elize.countries.ui.viewmodel.ListViewModel
+import com.elize.countries.utils.countrySingleList
+import com.elize.countries.utils.countrySingleListError
 import io.reactivex.Scheduler
-import io.reactivex.Single
 import io.reactivex.android.plugins.RxAndroidPlugins
 import io.reactivex.disposables.Disposable
 import io.reactivex.internal.schedulers.ExecutorScheduler
@@ -31,36 +30,9 @@ class ListViewModelTest {
     @InjectMocks
     var listViewModel = ListViewModel()
 
-    private var testSingle: Single<List<Country>>? = null
-
     @Before
     fun setup() {
-        MockitoAnnotations.initMocks(this)
-    }
-
-    @Test
-    fun getCountriesSuccess() {
-        val country = Country("countryName", "capital", "url")
-        val countriesList = arrayListOf(country)
-        testSingle = Single.just(countriesList)
-        Mockito.`when`(countryRepository.getCountries()).thenReturn(testSingle)
-
-        listViewModel.refresh()
-
-        Assert.assertEquals(1, listViewModel.countries.value?.size)
-        Assert.assertEquals(false, listViewModel.countryLoadError.value)
-        Assert.assertEquals(false, listViewModel.loading.value)
-    }
-
-    @Test
-    fun getCountriesFail() {
-        testSingle = Single.error(Throwable())
-        Mockito.`when`(countryRepository.getCountries()).thenReturn(testSingle)
-
-        listViewModel.refresh()
-
-        Assert.assertEquals(true, listViewModel.countryLoadError.value)
-        Assert.assertEquals(false, listViewModel.loading.value)
+        MockitoAnnotations.openMocks(this)
     }
 
     @Before
@@ -86,5 +58,28 @@ class ListViewModelTest {
         RxJavaPlugins.setInitSingleSchedulerHandler { scheduler }
         RxAndroidPlugins.setInitMainThreadSchedulerHandler { scheduler }
     }
+
+
+    @Test
+    fun `when repository returns valid country, viewModel state should be success`() {
+        Mockito.`when`(countryRepository.getCountries()).thenReturn(countrySingleList)
+
+        listViewModel.refresh()
+
+        Assert.assertEquals(1, listViewModel.countries.value?.size)
+        Assert.assertEquals(false, listViewModel.countryLoadError.value)
+        Assert.assertEquals(false, listViewModel.loading.value)
+    }
+
+    @Test
+    fun `when repository returns error, viewModel state should be error`() {
+        Mockito.`when`(countryRepository.getCountries()).thenReturn(countrySingleListError)
+
+        listViewModel.refresh()
+
+        Assert.assertEquals(true, listViewModel.countryLoadError.value)
+        Assert.assertEquals(false, listViewModel.loading.value)
+    }
+
 
 }

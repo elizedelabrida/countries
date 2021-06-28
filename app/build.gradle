@@ -46,6 +46,7 @@ def swipeRefreshLayoutVersion = '1.1.0'
 def junitVersion = '4.13.2'
 def mockitoVersion = '3.10.0'
 def archTestingVersion = '2.1.0'
+def robolectricVersion = '4.4'
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
@@ -74,6 +75,7 @@ dependencies {
     testImplementation "junit:junit:$junitVersion"
     testImplementation "androidx.arch.core:core-testing:$archTestingVersion"
     testImplementation "org.mockito:mockito-inline:$mockitoVersion"
+    testImplementation "org.robolectric:robolectric:$robolectricVersion"
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
