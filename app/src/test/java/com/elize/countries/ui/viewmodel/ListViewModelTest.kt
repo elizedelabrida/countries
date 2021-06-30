@@ -1,15 +1,15 @@
 package com.elize.countries.ui.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.elize.countries.fixtures.countrySingleList
+import com.elize.countries.fixtures.countrySingleListError
 import com.elize.countries.retrofit.CountryRepository
-import com.elize.countries.utils.countrySingleList
-import com.elize.countries.utils.countrySingleListError
 import io.reactivex.Scheduler
 import io.reactivex.android.plugins.RxAndroidPlugins
 import io.reactivex.disposables.Disposable
 import io.reactivex.internal.schedulers.ExecutorScheduler
 import io.reactivex.plugins.RxJavaPlugins
-import org.junit.Assert
+import junit.framework.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -66,9 +66,9 @@ class ListViewModelTest {
 
         listViewModel.refresh()
 
-        Assert.assertEquals(1, listViewModel.countries.value?.size)
-        Assert.assertEquals(false, listViewModel.countryLoadError.value)
-        Assert.assertEquals(false, listViewModel.loading.value)
+        assertEquals(1, listViewModel.countries.value?.size)
+        assertEquals(false, listViewModel.countryLoadError.value)
+        assertEquals(false, listViewModel.loading.value)
     }
 
     @Test
@@ -77,8 +77,8 @@ class ListViewModelTest {
 
         listViewModel.refresh()
 
-        Assert.assertEquals(true, listViewModel.countryLoadError.value)
-        Assert.assertEquals(false, listViewModel.loading.value)
+        assertEquals(true, listViewModel.countryLoadError.value)
+        assertEquals(false, listViewModel.loading.value)
     }
 
 

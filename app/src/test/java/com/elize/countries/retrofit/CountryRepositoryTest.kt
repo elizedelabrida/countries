@@ -1,7 +1,7 @@
 package com.elize.countries.retrofit
 
+import com.elize.countries.fixtures.countrySingleList
 import com.elize.countries.retrofit.service.CountryService
-import com.elize.countries.utils.countrySingleList
 import junit.framework.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test

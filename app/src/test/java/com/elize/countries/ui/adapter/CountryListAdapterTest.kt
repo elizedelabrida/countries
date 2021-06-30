@@ -1,8 +1,7 @@
 package com.elize.countries.ui.adapter
 
-import com.elize.countries.model.Country
-import com.elize.countries.utils.countryList
-import org.junit.Assert
+import com.elize.countries.fixtures.countryList
+import junit.framework.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
@@ -18,21 +17,21 @@ class CountryListAdapterTest {
     fun `should return correct size`() {
         adapter.updateCountries(countryList)
 
-        Assert.assertEquals(countryList.size, adapter.itemCount)
+        assertEquals(countryList.size, adapter.itemCount)
     }
 
     @Test
     fun `should update countries`() {
         adapter.updateCountries(countryList)
 
-        Assert.assertEquals(countryList, adapter.countries)
+        assertEquals(countryList, adapter.countries)
     }
 
     @Test
     fun `should clear items`() {
         adapter.clearAllItems()
 
-        Assert.assertEquals(0, adapter.itemCount)
+        assertEquals(0, adapter.itemCount)
     }
 
 }

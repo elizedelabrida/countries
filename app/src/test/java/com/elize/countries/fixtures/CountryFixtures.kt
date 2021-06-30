@@ -1,4 +1,4 @@
-package com.elize.countries.utils
+package com.elize.countries.fixtures
 
 import com.elize.countries.model.Country
 import io.reactivex.Single
