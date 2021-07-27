@@ -10,6 +10,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 @Module
 class AppModule {
+    //Use Hilt: https://developer.android.com/training/dependency-injection/hilt-android
+
     private val BASE_URL = "https://raw.githubusercontent.com"
 
     @Provides
